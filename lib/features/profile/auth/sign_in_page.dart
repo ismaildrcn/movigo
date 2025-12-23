@@ -284,22 +284,21 @@ class _SignInPageState extends State<SignInPage> {
       _authService.signInUser(_email!, _password!).then((response) {
         if (response != null) {
           if (response.statusCode == 200) {
-            // Handle successful login
+
             Provider.of<AuthProvider>(
               context,
               listen: false,
             ).login(AuthResponse.fromJson(response.data));
             ApiService.addTokenInterceptor();
-            // context.push(AppRoutes.home);
+          } else {
+            // Hata durumunda snackbar göster
+            AnimatedSnackBar.material(
+              response.data["message"],
+              type: response.statusCode == 404
+                  ? AnimatedSnackBarType.error
+                  : AnimatedSnackBarType.warning,
+            ).show(context);
           }
-          return AnimatedSnackBar.material(
-            response.data["message"],
-            type: response.statusCode == 404
-                ? AnimatedSnackBarType.error
-                : response.statusCode == 401
-                ? AnimatedSnackBarType.warning
-                : AnimatedSnackBarType.success,
-          ).show(context);
         } else {
           // Handle login error
         }

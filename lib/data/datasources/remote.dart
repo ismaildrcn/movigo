@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:imdb_app/features/profile/utils/storage.dart';
 
 class ApiService {
-  static const String baseUrl = "http://192.168.1.100:8000";
-  // static const String baseUrl ="https://imdb-app-backend-py.onrender.com";
+  // static const String baseUrl = "http://192.168.1.100:8000";
+  static const String baseUrl ="https://imdb-app-backend-py.onrender.com";
 
   static final Dio _dio = Dio(
     BaseOptions(

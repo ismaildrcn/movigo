@@ -79,10 +79,6 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
         if (result.statusCode == 200) {
           context.push(AppRoutes.login);
-          AnimatedSnackBar.material(
-            result.data["message"],
-            type: AnimatedSnackBarType.info,
-          ).show(context);
         } else if (result.statusCode == 400) {
           AnimatedSnackBar.material(
             result.data["message"],
@@ -453,11 +449,12 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
         }
 
         if (result.statusCode == 200) {
-          context.push(AppRoutes.login);
-          return AnimatedSnackBar.material(
+          AnimatedSnackBar.material(
             result.data["message"],
             type: AnimatedSnackBarType.info,
           ).show(context);
+          context.push(AppRoutes.login);
+          return;
         } else if (result.statusCode == 400) {
           return AnimatedSnackBar.material(
             result.data["message"],

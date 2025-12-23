@@ -345,9 +345,12 @@ class _MoviePageState extends State<MoviePage> {
                         size: 24,
                       ),
                       SizedBox(width: 4),
-                      Text(
-                        _movie!.genres![0].name,
-                        style: TextStyle(color: Colors.grey[500], fontSize: 18),
+                      Flexible(
+                        child: Text(
+                          _movie!.genres![0].name,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(color: Colors.grey[500], fontSize: 18),
+                        ),
                       ),
                     ],
                   ),
