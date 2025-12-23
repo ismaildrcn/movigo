@@ -47,10 +47,10 @@ dependencies:
   carousel_slider: ^5.1.1
   youtube_player_flutter: ^9.1.1
   flutter_inappwebview: ^6.1.5
-  flutter_native_splash: ^2.4.6
   animated_snack_bar: ^0.4.0
   flutter_secure_storage: ^9.2.4
   visibility_detector: ^0.4.0+2
+  flutter_launcher_icons: ^0.14.4
 
 dev_dependencies:
   flutter_test:
@@ -117,3 +117,8 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/img/movigo-icon-croped.png"
