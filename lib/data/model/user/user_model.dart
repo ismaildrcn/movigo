@@ -1,4 +1,4 @@
-import 'package:imdb_app/features/profile/user.dart';
+import 'package:imdb_app/features/profile/widgets/common_widgets.dart';
 
 class UserModel {
   final int? id;
@@ -44,7 +44,7 @@ class UserModel {
       isVerified: json['is_verified'],
       createdAt: json['created_at'],
       token: json['token'],
-      birthdate: json['birthdate'],
+      birthdate: json['birth_date'],
       gender: json['gender'] != null
           ? GenderEnum.values.firstWhere(
               (e) => e.toString() == 'GenderEnum.' + json['gender'],
@@ -64,7 +64,7 @@ class UserModel {
       'is_active': isActive,
       'is_verified': isVerified,
       'created_at': createdAt,
-      'birthdate': birthdate,
+      'birth_date': birthdate,
       'gender': gender != null ? gender.toString().split('.').last : null,
     };
   }

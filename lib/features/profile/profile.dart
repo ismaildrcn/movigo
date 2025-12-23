@@ -3,11 +3,26 @@ import 'package:go_router/go_router.dart';
 import 'package:imdb_app/app/router.dart';
 import 'package:imdb_app/app/theme_manager.dart';
 import 'package:imdb_app/app/topbar.dart';
+import 'package:imdb_app/data/model/user/user_model.dart';
 import 'package:imdb_app/features/profile/utils/auth_provider.dart';
 import 'package:provider/provider.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  UserModel? currentUser;
+
+  @override
+  void initState() {
+    super.initState();
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    currentUser = authProvider.user;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,11 +67,11 @@ class ProfilePage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           CircleAvatar(
-                            foregroundImage: AssetImage(
-                              "assets/img/ismail-durcan.jpg",
-                            ),
                             radius: 40,
-                            child: Icon(Icons.person),
+                            backgroundColor: Colors.transparent,
+                            backgroundImage: currentUser?.avatar != null
+                                ? NetworkImage(currentUser!.avatar!)
+                                : AssetImage("assets/img/popcorn.png"),
                           ),
                           Column(
                             spacing: 10,
@@ -73,7 +88,7 @@ class ProfilePage extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "İsmail DURCAN",
+                                currentUser?.fullName ?? "Guest",
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,

@@ -69,6 +69,7 @@ class AppRouter {
           currentPath != AppRoutes.onboardingSecond &&
           currentPath != AppRoutes.onboardingThird &&
           currentPath != AppRoutes.createAccount &&
+          currentPath != AppRoutes.markdownViewer &&
           currentPath != AppRoutes.login) {
         return AppRoutes.onboardingFirst;
       }

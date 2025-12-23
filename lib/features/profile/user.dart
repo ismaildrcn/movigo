@@ -5,9 +5,8 @@ import 'package:imdb_app/app/topbar.dart';
 import 'package:imdb_app/data/model/user/user_model.dart';
 import 'package:imdb_app/data/services/user_service.dart';
 import 'package:imdb_app/features/profile/utils/auth_provider.dart';
+import 'package:imdb_app/features/profile/widgets/common_widgets.dart';
 import 'package:provider/provider.dart';
-
-enum GenderEnum { male, female }
 
 class UserEditPage extends StatefulWidget {
   const UserEditPage({super.key});
@@ -78,22 +77,23 @@ class _UserEditPageState extends State<UserEditPage> {
                         children: [
                           Expanded(
                             flex: 1,
-                            child: _genderCard(selectedGender!, Icons.male),
+                            child: GenderCard(
+                              selectedGender: selectedGender!,
+                              onGenderChanged: (gender) {
+                                setState(() {
+                                  selectedGender = gender;
+                                });
+                              },
+                            ),
                           ),
                           const SizedBox(width: 16),
                           Expanded(
                             flex: 1,
-                            child: TextField(
+                            child: DatePickerField(
                               controller: _birthDateController,
-                              readOnly: true,
-                              onTap: () => _selectDate(context),
-                              decoration:
-                                  buildInputDecoration(
-                                    hintText: "Birth Date",
-                                  ).copyWith(
-                                    suffixIcon: Icon(Icons.calendar_today),
-                                  ),
-                              style: TextStyle(fontSize: 14),
+                              decoration: buildInputDecoration(
+                                hintText: "Birth Date",
+                              ),
                             ),
                           ),
                         ],
@@ -211,91 +211,10 @@ class _UserEditPageState extends State<UserEditPage> {
         borderRadius: BorderRadius.circular(5),
       ),
       focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Theme.of(context).colorScheme.primary),
+        borderSide: BorderSide(
+          color: Theme.of(context).colorScheme.primary.withAlpha(128),
+        ),
         borderRadius: BorderRadius.circular(5),
-      ),
-    );
-  }
-
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-      builder: (context, child) {
-        return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: Theme.of(context).colorScheme.copyWith(
-              primary: Theme.of(context).colorScheme.primary,
-              onPrimary: Colors.white,
-              onSurface: Theme.of(context).textTheme.bodyLarge!.color,
-            ),
-            textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(
-                foregroundColor: Theme.of(context).colorScheme.primary,
-              ),
-            ),
-          ),
-          child: child!,
-        );
-      },
-    );
-    if (picked != null) {
-      setState(() {
-        _birthDateController.text =
-            "${picked.day}/${picked.month}/${picked.year}";
-      });
-    }
-  }
-
-  Widget _genderCard(GenderEnum gender, IconData icon) {
-    bool isMale = selectedGender == GenderEnum.male;
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          selectedGender = isMale ? GenderEnum.female : GenderEnum.male;
-        });
-      },
-
-      child: AnimatedContainer(
-        duration: Duration(milliseconds: 200),
-        padding: EdgeInsets.symmetric(horizontal: 2),
-        decoration: BoxDecoration(
-          color: isMale
-              ? Theme.of(context).colorScheme.primary.withAlpha(25)
-              : Colors.pink.withAlpha(25),
-          borderRadius: BorderRadius.circular(5),
-          border: Border.all(
-            color: isMale
-                ? Theme.of(context).colorScheme.primary.withAlpha(25)
-                : Colors.pink.withAlpha(25),
-            width: 2,
-          ),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              isMale ? Icons.male : Icons.female,
-              color: isMale
-                  ? Theme.of(context).colorScheme.primary
-                  : Colors.pink,
-              size: 24,
-            ),
-            SizedBox(width: 6),
-            Text(
-              selectedGender.toString().split('.').last.toUpperCase(),
-              style: TextStyle(
-                color: isMale
-                    ? Theme.of(context).colorScheme.primary
-                    : Colors.pink,
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

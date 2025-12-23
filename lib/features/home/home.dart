@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:imdb_app/app/router.dart';
 import 'package:imdb_app/data/model/movie/movie_model.dart';
+import 'package:imdb_app/data/model/user/user_model.dart';
 import 'package:imdb_app/data/services/constant/api_constants.dart';
 import 'package:imdb_app/data/services/movie_service.dart';
 import 'package:imdb_app/features/home/utils/image_utils.dart';
 import 'package:imdb_app/features/home/widgets/movie_carousel.dart';
+import 'package:imdb_app/features/profile/utils/auth_provider.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,11 +26,14 @@ class _HomePageState extends State<HomePage> {
   List<MovieModel> _nowPlayingMovies = [];
   List<MovieModel> _upComingMovies = [];
   List<MovieModel> _trendingMovies = [];
+  UserModel? currentUser;
 
   @override
   void initState() {
     super.initState();
     _movieService = MovieService();
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    currentUser = authProvider.user;
     loadData();
   }
 
@@ -101,7 +107,10 @@ class _HomePageState extends State<HomePage> {
         children: [
           CircleAvatar(
             radius: 40,
-            backgroundImage: AssetImage("assets/img/ismail-durcan.jpg"),
+            backgroundColor: Colors.transparent,
+            backgroundImage: currentUser?.avatar != null
+                ? NetworkImage(currentUser!.avatar!)
+                : AssetImage("assets/img/popcorn.png"),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -109,7 +118,7 @@ class _HomePageState extends State<HomePage> {
             spacing: 4,
             children: [
               Text(
-                "Hello, İsmail",
+                "Hello, ${currentUser?.fullName ?? 'Guest'}",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               Text(

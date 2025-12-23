@@ -3,6 +3,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:imdb_app/app/router.dart';
+import 'package:imdb_app/app/topbar.dart';
 import 'package:imdb_app/data/datasources/remote.dart';
 import 'package:imdb_app/data/services/auth_service.dart';
 import 'package:imdb_app/features/home/widgets/auth_common_footer.dart';
@@ -54,16 +55,12 @@ class _SignInPageState extends State<SignInPage> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(18),
+          padding: const EdgeInsets.symmetric(horizontal: 18),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                  "Sign in",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 20),
+                TopBar(title: "Sign In", showBackButton: false),
                 Form(
                   key: _formKey,
                   child: Column(
@@ -77,7 +74,9 @@ class _SignInPageState extends State<SignInPage> {
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8)),
                             borderSide: BorderSide(
-                              color: Theme.of(context).colorScheme.primary,
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.primary.withAlpha(128),
                             ),
                           ),
                           enabledBorder: OutlineInputBorder(
@@ -94,13 +93,17 @@ class _SignInPageState extends State<SignInPage> {
                           errorBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8)),
                             borderSide: BorderSide(
-                              color: Theme.of(context).colorScheme.error,
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.error.withAlpha(128),
                             ),
                           ),
                           focusedErrorBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8)),
                             borderSide: BorderSide(
-                              color: Theme.of(context).colorScheme.error,
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.error.withAlpha(128),
                             ),
                           ),
                         ),
@@ -124,14 +127,18 @@ class _SignInPageState extends State<SignInPage> {
                               isPasswordVisible
                                   ? Icons.visibility
                                   : Icons.visibility_off,
-                              color: Theme.of(context).colorScheme.primary,
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.primary.withAlpha(128),
                             ),
                           ),
                           labelText: "Password",
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8)),
                             borderSide: BorderSide(
-                              color: Theme.of(context).colorScheme.primary,
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.primary.withAlpha(128),
                             ),
                           ),
                           enabledBorder: OutlineInputBorder(
@@ -206,7 +213,9 @@ class _SignInPageState extends State<SignInPage> {
                         thickness: 1,
                         indent: 5,
                         endIndent: 10,
-                        color: Theme.of(context).colorScheme.primary,
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.primary.withAlpha(68),
                       ),
                     ),
                     Padding(
@@ -224,7 +233,9 @@ class _SignInPageState extends State<SignInPage> {
                         thickness: 1,
                         indent: 10,
                         endIndent: 5,
-                        color: Theme.of(context).colorScheme.primary,
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.primary.withAlpha(68),
                       ),
                     ),
                   ],
@@ -235,14 +246,26 @@ class _SignInPageState extends State<SignInPage> {
                     context.push(AppRoutes.createAccount);
                   },
                   style: TextButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.secondary,
-                    foregroundColor: Theme.of(context).colorScheme.surface,
+                    backgroundColor: Theme.of(context).colorScheme.surface,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
+                      side: BorderSide(
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.primary.withAlpha(128),
+                        width: 2.0,
+                      ),
                     ),
                     minimumSize: Size(double.infinity, 40),
                   ),
-                  child: Text("Create Account"),
+                  child: Text(
+                    "Create Account",
+                    style: TextStyle(
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primary.withAlpha(128),
+                    ),
+                  ),
                 ),
                 SizedBox(height: 16),
                 CommonFooterLinks(),
