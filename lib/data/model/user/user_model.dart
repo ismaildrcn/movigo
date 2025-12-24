@@ -1,4 +1,4 @@
-import 'package:imdb_app/features/profile/widgets/common_widgets.dart';
+import 'package:movigo/features/profile/widgets/common_widgets.dart';
 
 class UserModel {
   final int? id;

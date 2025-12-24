@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:imdb_app/data/datasources/remote.dart';
-import 'package:imdb_app/data/model/movie/movie_model.dart';
+import 'package:movigo/data/datasources/remote.dart';
+import 'package:movigo/data/model/movie/movie_model.dart';
 
 class MovieTypes {
   static const String topRated = "top_rated";

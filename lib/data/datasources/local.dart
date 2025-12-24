@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:imdb_app/data/model/movie/movie_model.dart';
+import 'package:movigo/data/model/movie/movie_model.dart';
 
 class MostPopularMoviesLocalDataSource {
   Future<List<MovieModel>> getMovies() async {

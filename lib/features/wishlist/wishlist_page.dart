@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:imdb_app/app/topbar.dart';
-import 'package:imdb_app/data/model/user/user_model.dart';
-import 'package:imdb_app/data/services/constant/api_constants.dart';
-import 'package:imdb_app/data/services/user_service.dart';
-import 'package:imdb_app/features/home/utils/image_utils.dart';
-import 'package:imdb_app/data/model/movie/movie_model.dart';
-import 'package:imdb_app/features/profile/utils/auth_provider.dart';
+import 'package:movigo/app/topbar.dart';
+import 'package:movigo/data/model/user/user_model.dart';
+import 'package:movigo/data/services/constant/api_constants.dart';
+import 'package:movigo/data/services/user_service.dart';
+import 'package:movigo/features/home/utils/image_utils.dart';
+import 'package:movigo/data/model/movie/movie_model.dart';
+import 'package:movigo/features/profile/utils/auth_provider.dart';
 import 'package:provider/provider.dart';
 
 class WishlistPage extends StatefulWidget {

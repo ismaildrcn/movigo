@@ -2,12 +2,12 @@ import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:imdb_app/app/router.dart';
-import 'package:imdb_app/app/topbar.dart';
-import 'package:imdb_app/data/model/user/user_model.dart';
-import 'package:imdb_app/data/services/auth_service.dart';
-import 'package:imdb_app/features/home/widgets/auth_common_footer.dart';
-import 'package:imdb_app/features/profile/widgets/common_widgets.dart';
+import 'package:movigo/app/router.dart';
+import 'package:movigo/app/topbar.dart';
+import 'package:movigo/data/model/user/user_model.dart';
+import 'package:movigo/data/services/auth_service.dart';
+import 'package:movigo/features/home/widgets/auth_common_footer.dart';
+import 'package:movigo/features/profile/widgets/common_widgets.dart';
 import 'package:intl/intl.dart';
 
 class CreateAccountPage extends StatefulWidget {

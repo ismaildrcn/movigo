@@ -1,5 +1,5 @@
-import 'package:imdb_app/data/model/movie/cast_model.dart';
-import 'package:imdb_app/data/model/movie/crew_model.dart';
+import 'package:movigo/data/model/movie/cast_model.dart';
+import 'package:movigo/data/model/movie/crew_model.dart';
 
 class Credits {
   final int id;

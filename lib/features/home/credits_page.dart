@@ -1,12 +1,12 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:imdb_app/app/topbar.dart';
-import 'package:imdb_app/data/model/movie/credits_model.dart';
-import 'package:imdb_app/data/model/movie/person_model.dart';
-import 'package:imdb_app/data/services/constant/api_constants.dart';
-import 'package:imdb_app/data/services/person_service.dart';
-import 'package:imdb_app/features/home/utils/image_utils.dart';
+import 'package:movigo/app/topbar.dart';
+import 'package:movigo/data/model/movie/credits_model.dart';
+import 'package:movigo/data/model/movie/person_model.dart';
+import 'package:movigo/data/services/constant/api_constants.dart';
+import 'package:movigo/data/services/person_service.dart';
+import 'package:movigo/features/home/utils/image_utils.dart';
 import 'package:intl/intl.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 

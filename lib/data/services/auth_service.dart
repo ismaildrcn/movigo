@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
-import 'package:imdb_app/data/datasources/remote.dart';
-import 'package:imdb_app/data/model/user/user_model.dart';
+import 'package:movigo/data/datasources/remote.dart';
+import 'package:movigo/data/model/user/user_model.dart';
 
 class AuthService {
   final _dio = ApiService.instance;

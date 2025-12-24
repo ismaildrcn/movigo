@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:imdb_app/app/router.dart';
+import 'package:movigo/app/router.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
   final GoRouterState state;

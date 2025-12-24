@@ -1,4 +1,4 @@
-name: imdb_app
+name: movigo
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -78,7 +78,6 @@ flutter:
     - assets/
     - assets/.env
     - assets/img/
-    - assets/json/
     - assets/fonts/
     - assets/markdown/
     - assets/markdown/legal/
@@ -118,7 +117,8 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
 
-flutter_icons:
+flutter_launcher_icons:
   android: true
   ios: true
+  adaptive_icon_background: "#1F1D2B"
   image_path: "assets/img/movigo-icon-croped.png"

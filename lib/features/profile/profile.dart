@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:imdb_app/app/router.dart';
-import 'package:imdb_app/app/theme_manager.dart';
-import 'package:imdb_app/app/topbar.dart';
-import 'package:imdb_app/data/model/user/user_model.dart';
-import 'package:imdb_app/features/profile/utils/auth_provider.dart';
+import 'package:movigo/app/router.dart';
+import 'package:movigo/app/theme_manager.dart';
+import 'package:movigo/app/topbar.dart';
+import 'package:movigo/data/model/user/user_model.dart';
+import 'package:movigo/features/profile/utils/auth_provider.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {

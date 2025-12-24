@@ -2,13 +2,13 @@ import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:imdb_app/app/router.dart';
-import 'package:imdb_app/app/topbar.dart';
-import 'package:imdb_app/data/datasources/remote.dart';
-import 'package:imdb_app/data/services/auth_service.dart';
-import 'package:imdb_app/features/home/widgets/auth_common_footer.dart';
-import 'package:imdb_app/features/profile/utils/auth_provider.dart';
-import 'package:imdb_app/features/profile/utils/auth_response.dart';
+import 'package:movigo/app/router.dart';
+import 'package:movigo/app/topbar.dart';
+import 'package:movigo/data/datasources/remote.dart';
+import 'package:movigo/data/services/auth_service.dart';
+import 'package:movigo/features/home/widgets/auth_common_footer.dart';
+import 'package:movigo/features/profile/utils/auth_provider.dart';
+import 'package:movigo/features/profile/utils/auth_response.dart';
 import 'package:provider/provider.dart';
 
 class SignInPage extends StatefulWidget {
@@ -221,7 +221,7 @@ class _SignInPageState extends State<SignInPage> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: Text(
-                        "New to IMDb?",
+                        "New to Movigo?",
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           color: Theme.of(context).colorScheme.onSecondary,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:imdb_app/app/topbar.dart';
-import 'package:imdb_app/data/model/movie/review_model.dart';
-import 'package:imdb_app/data/services/reviews_service.dart';
-import 'package:imdb_app/features/home/widgets/review_card.dart';
+import 'package:movigo/app/topbar.dart';
+import 'package:movigo/data/model/movie/review_model.dart';
+import 'package:movigo/data/services/reviews_service.dart';
+import 'package:movigo/features/home/widgets/review_card.dart';
 
 class ReviewPage extends StatefulWidget {
   final int id;

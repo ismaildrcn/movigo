@@ -1,21 +1,21 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:go_router/go_router.dart';
-import 'package:imdb_app/app/router.dart';
-import 'package:imdb_app/data/model/movie/credits_model.dart';
-import 'package:imdb_app/data/model/movie/review_model.dart';
-import 'package:imdb_app/data/model/movie/video_model.dart';
-import 'package:imdb_app/data/model/user/user_model.dart';
-import 'package:imdb_app/data/services/credits_service.dart';
-import 'package:imdb_app/data/services/constant/api_constants.dart';
-import 'package:imdb_app/data/services/movie_service.dart';
+import 'package:movigo/app/router.dart';
+import 'package:movigo/data/model/movie/credits_model.dart';
+import 'package:movigo/data/model/movie/review_model.dart';
+import 'package:movigo/data/model/movie/video_model.dart';
+import 'package:movigo/data/model/user/user_model.dart';
+import 'package:movigo/data/services/credits_service.dart';
+import 'package:movigo/data/services/constant/api_constants.dart';
+import 'package:movigo/data/services/movie_service.dart';
 import 'package:flutter/material.dart';
-import 'package:imdb_app/data/model/movie/movie_model.dart';
-import 'package:imdb_app/data/services/reviews_service.dart';
-import 'package:imdb_app/data/services/user_service.dart';
-import 'package:imdb_app/data/services/video_service.dart';
-import 'package:imdb_app/features/home/utils/image_utils.dart';
-import 'package:imdb_app/features/home/widgets/review_card.dart';
-import 'package:imdb_app/features/profile/utils/auth_provider.dart';
+import 'package:movigo/data/model/movie/movie_model.dart';
+import 'package:movigo/data/services/reviews_service.dart';
+import 'package:movigo/data/services/user_service.dart';
+import 'package:movigo/data/services/video_service.dart';
+import 'package:movigo/features/home/utils/image_utils.dart';
+import 'package:movigo/features/home/widgets/review_card.dart';
+import 'package:movigo/features/profile/utils/auth_provider.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -349,7 +349,10 @@ class _MoviePageState extends State<MoviePage> {
                         child: Text(
                           _movie!.genres![0].name,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(color: Colors.grey[500], fontSize: 18),
+                          style: TextStyle(
+                            color: Colors.grey[500],
+                            fontSize: 18,
+                          ),
                         ),
                       ),
                     ],

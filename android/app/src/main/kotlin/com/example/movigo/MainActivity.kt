@@ -1,4 +1,4 @@
-package com.example.imdb_app
+package com.example.movigo
 
 import io.flutter.embedding.android.FlutterActivity
 

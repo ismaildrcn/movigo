@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
-import 'package:imdb_app/data/datasources/remote.dart';
+import 'package:movigo/data/datasources/remote.dart';
 
 class UserService {
   final _dio = ApiService.instance;
