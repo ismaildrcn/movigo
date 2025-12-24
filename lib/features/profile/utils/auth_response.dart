@@ -1,4 +1,4 @@
-import 'package:imdb_app/data/model/user/user_model.dart';
+import 'package:movigo/data/model/user/user_model.dart';
 
 class AuthResponse {
   final String token;

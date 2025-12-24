@@ -1,6 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:imdb_app/features/home/widgets/auth_common_footer.dart';
+import 'package:movigo/features/home/widgets/auth_common_footer.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
@@ -36,7 +36,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Image.asset("assets/img/imdb-logo.png", height: 55),
+        title: Image.asset("assets/img/movigo-icon-croped.png", height: 55),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: Padding(

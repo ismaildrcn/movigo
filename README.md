@@ -1,6 +1,6 @@
-# IMDb App
+# Movigo
 
-IMDb App is an open-source movie and TV show information application built with Flutter.
+Movigo is an open-source movie and TV show information application built with Flutter.
 
 ## Features
 

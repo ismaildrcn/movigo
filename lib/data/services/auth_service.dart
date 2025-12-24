@@ -1,14 +1,21 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
-import 'package:imdb_app/data/datasources/remote.dart';
-import 'package:imdb_app/data/model/user/user_model.dart';
+import 'package:movigo/data/datasources/remote.dart';
+import 'package:movigo/data/model/user/user_model.dart';
 
 class AuthService {
   final _dio = ApiService.instance;
 
   Future<Response?> createUser(UserModel user) async {
     try {
-      final response = await _dio.post('/auth/register', data: user.toJson());
+      Map<String, dynamic> userData = {
+        'full_name': user.fullName,
+        'email': user.email,
+        'password': user.password,
+        'birth_date': user.birthdate,
+        'gender': user.gender.toString().split('.').last,
+      };
+      final response = await _dio.post('/auth/register', data: userData);
       return response;
     } catch (e) {
       debugPrint("Error creating user: $e");

@@ -1,3 +1,5 @@
+import 'package:movigo/features/profile/widgets/common_widgets.dart';
+
 class UserModel {
   final int? id;
   final String fullName;
@@ -10,6 +12,8 @@ class UserModel {
   final String role;
   final String? createdAt;
   final String? token;
+  final String? birthdate;
+  final GenderEnum? gender;
 
   UserModel({
     this.id,
@@ -23,6 +27,8 @@ class UserModel {
     this.isVerified,
     this.createdAt,
     this.token,
+    this.birthdate,
+    this.gender,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -38,6 +44,12 @@ class UserModel {
       isVerified: json['is_verified'],
       createdAt: json['created_at'],
       token: json['token'],
+      birthdate: json['birth_date'],
+      gender: json['gender'] != null
+          ? GenderEnum.values.firstWhere(
+              (e) => e.toString() == 'GenderEnum.' + json['gender'],
+            )
+          : null,
     );
   }
 
@@ -52,6 +64,8 @@ class UserModel {
       'is_active': isActive,
       'is_verified': isVerified,
       'created_at': createdAt,
+      'birth_date': birthdate,
+      'gender': gender != null ? gender.toString().split('.').last : null,
     };
   }
 }

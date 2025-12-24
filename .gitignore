@@ -252,3 +252,6 @@ google-services.json
 
 .env
 assets/.env
+.idea
+
+TODO.md

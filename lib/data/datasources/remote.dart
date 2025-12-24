@@ -1,12 +1,13 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:imdb_app/features/profile/utils/storage.dart';
-
+import 'package:movigo/features/profile/utils/storage.dart';
 
 class ApiService {
+  static const String baseUrl = "http://192.168.1.100:8000";
+  // static const String baseUrl ="https://imdb-app-backend-py.onrender.com";
+
   static final Dio _dio = Dio(
     BaseOptions(
-      baseUrl: _buildBaseUrl(),
+      baseUrl: "$baseUrl/v1/api",
       connectTimeout: Duration(seconds: 10),
       receiveTimeout: Duration(seconds: 10),
       headers: {
@@ -32,21 +33,6 @@ class ApiService {
         },
       ),
     );
-  }
-
-  static String _buildBaseUrl() {
-    final baseUrl = dotenv.env["BASE_URL"] ?? "http://localhost";
-    final port = dotenv.env["PORT"] ?? "8000";
-
-    String fullBaseUrl;
-    if (baseUrl.startsWith('http://') || baseUrl.startsWith('https://')) {
-      fullBaseUrl = baseUrl;
-    } else {
-      fullBaseUrl = 'http://$baseUrl';
-    }
-
-    final finalUrl = '$fullBaseUrl:$port/v1/api';
-    return finalUrl;
   }
 
   static Dio get instance => _dio;

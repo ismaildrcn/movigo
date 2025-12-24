@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:imdb_app/app/router.dart';
+import 'package:movigo/app/router.dart';
 
 class OnboardingBottomCard extends StatelessWidget {
   final String title;
