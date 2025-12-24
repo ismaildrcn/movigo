@@ -1,5 +1,5 @@
-import 'package:imdb_app/data/datasources/remote.dart';
-import 'package:imdb_app/data/model/movie/movie_model.dart';
+import 'package:movigo/data/datasources/remote.dart';
+import 'package:movigo/data/model/movie/movie_model.dart';
 
 class GenreService {
   final _dio = ApiService.instance;

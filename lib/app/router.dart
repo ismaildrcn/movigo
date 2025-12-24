@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:imdb_app/data/model/movie/credits_model.dart';
-import 'package:imdb_app/data/model/movie/movie_model.dart';
-import 'package:imdb_app/features/home/review_page.dart';
-import 'package:imdb_app/features/home/upcoming_page.dart';
-import 'package:imdb_app/features/home/widgets/bottom_navigation_bar.dart';
-import 'package:imdb_app/features/onboarding/onboarding_first.dart';
-import 'package:imdb_app/features/onboarding/onboarding_second.dart';
-import 'package:imdb_app/features/onboarding/onboarding_third.dart';
-import 'package:imdb_app/features/profile/auth/create_account_page.dart';
-import 'package:imdb_app/features/profile/auth/forgot_password_page.dart';
-import 'package:imdb_app/features/profile/auth/reset_password_page.dart';
-import 'package:imdb_app/features/profile/auth/sign_in_page.dart';
-import 'package:imdb_app/features/profile/auth/verify_email.dart';
-import 'package:imdb_app/features/home/credits_page.dart';
-import 'package:imdb_app/features/home/movies_page.dart';
-import 'package:imdb_app/features/home/movie_page.dart';
-import 'package:imdb_app/features/profile/markdown_viewer.dart';
-import 'package:imdb_app/features/browser/browser.dart';
-import 'package:imdb_app/features/profile/utils/auth_provider.dart';
-import 'package:imdb_app/features/wishlist/wishlist_page.dart';
-import 'package:imdb_app/features/home/home.dart';
-import 'package:imdb_app/features/profile/profile.dart';
+import 'package:movigo/data/model/movie/credits_model.dart';
+import 'package:movigo/data/model/movie/movie_model.dart';
+import 'package:movigo/features/home/review_page.dart';
+import 'package:movigo/features/home/upcoming_page.dart';
+import 'package:movigo/features/home/widgets/bottom_navigation_bar.dart';
+import 'package:movigo/features/onboarding/onboarding_first.dart';
+import 'package:movigo/features/onboarding/onboarding_second.dart';
+import 'package:movigo/features/onboarding/onboarding_third.dart';
+import 'package:movigo/features/profile/auth/create_account_page.dart';
+import 'package:movigo/features/profile/auth/forgot_password_page.dart';
+import 'package:movigo/features/profile/auth/reset_password_page.dart';
+import 'package:movigo/features/profile/auth/sign_in_page.dart';
+import 'package:movigo/features/profile/auth/verify_email.dart';
+import 'package:movigo/features/home/credits_page.dart';
+import 'package:movigo/features/home/movies_page.dart';
+import 'package:movigo/features/home/movie_page.dart';
+import 'package:movigo/features/profile/markdown_viewer.dart';
+import 'package:movigo/features/browser/browser.dart';
+import 'package:movigo/features/profile/user.dart';
+import 'package:movigo/features/profile/utils/auth_provider.dart';
+import 'package:movigo/features/wishlist/wishlist_page.dart';
+import 'package:movigo/features/home/home.dart';
+import 'package:movigo/features/profile/profile.dart';
 
 class AppRoutes {
   AppRoutes._();
@@ -44,6 +45,7 @@ class AppRoutes {
   static const String onboardingSecond = '/onboarding-second';
   static const String onboardingThird = '/onboarding-third';
   static const String wishlist = '/wishlist';
+  static const String userEdit = '/user-edit';
 }
 
 class AppRouter {
@@ -67,6 +69,7 @@ class AppRouter {
           currentPath != AppRoutes.onboardingSecond &&
           currentPath != AppRoutes.onboardingThird &&
           currentPath != AppRoutes.createAccount &&
+          currentPath != AppRoutes.markdownViewer &&
           currentPath != AppRoutes.login) {
         return AppRoutes.onboardingFirst;
       }
@@ -253,35 +256,14 @@ class AppRouter {
             return MaterialPage(child: WishlistPage());
           },
         ),
+        GoRoute(
+          name: "userEdit",
+          path: AppRoutes.userEdit,
+          pageBuilder: (context, state) {
+            return MaterialPage(child: UserEditPage());
+          },
+        ),
       ],
     ),
   ];
-}
-
-AppBar topNavBar(BuildContext context, String? title) {
-  return AppBar(
-    automaticallyImplyLeading: true, // Geri butonunu gerektiğinde gösterir
-    toolbarHeight: 60,
-    title: Text(title ?? ""),
-    titleTextStyle: TextStyle(
-      color: Colors.grey[900],
-      fontSize: 18,
-      fontWeight: FontWeight.bold,
-    ),
-    centerTitle: true,
-    leadingWidth: 70,
-    leading: Padding(
-      padding: const EdgeInsets.only(left: 20),
-      child: (Navigator.of(context).canPop())
-          ? BackButton(color: Colors.grey[900])
-          : Image.asset("assets/img/imdb-logo.png"),
-    ),
-    actions: [
-      Container(
-        margin: const EdgeInsets.only(right: 10),
-        child: Icon(Icons.notifications, size: 24, color: Colors.grey[900]),
-      ),
-    ],
-    backgroundColor: Theme.of(context).colorScheme.primary,
-  );
 }

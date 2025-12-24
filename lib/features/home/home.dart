@@ -2,13 +2,16 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:imdb_app/app/router.dart';
-import 'package:imdb_app/data/model/movie/movie_model.dart';
-import 'package:imdb_app/data/services/constant/api_constants.dart';
-import 'package:imdb_app/data/services/movie_service.dart';
-import 'package:imdb_app/features/home/utils/image_utils.dart';
-import 'package:imdb_app/features/home/widgets/movie_carousel.dart';
+import 'package:movigo/app/router.dart';
+import 'package:movigo/data/model/movie/movie_model.dart';
+import 'package:movigo/data/model/user/user_model.dart';
+import 'package:movigo/data/services/constant/api_constants.dart';
+import 'package:movigo/data/services/movie_service.dart';
+import 'package:movigo/features/home/utils/image_utils.dart';
+import 'package:movigo/features/home/widgets/movie_carousel.dart';
+import 'package:movigo/features/profile/utils/auth_provider.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -22,11 +25,15 @@ class _HomePageState extends State<HomePage> {
   List<MovieModel> _topRatedMovies = [];
   List<MovieModel> _nowPlayingMovies = [];
   List<MovieModel> _upComingMovies = [];
+  List<MovieModel> _trendingMovies = [];
+  UserModel? currentUser;
 
   @override
   void initState() {
     super.initState();
     _movieService = MovieService();
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    currentUser = authProvider.user;
     loadData();
   }
 
@@ -36,11 +43,15 @@ class _HomePageState extends State<HomePage> {
       type: MovieTypes.nowPlaying,
     );
     final upcoming = await _movieService.fetchMovies(type: MovieTypes.upcoming);
+    final trending = await _movieService.fetchTrendingMovies(
+      type: MovieTypes.popular,
+    );
     if (mounted) {
       setState(() {
         _topRatedMovies = topRated;
         _nowPlayingMovies = nowPlaying;
         _upComingMovies = upcoming;
+        _trendingMovies = trending;
       });
     }
   }
@@ -48,7 +59,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: topNavBar(context, null),
       body: SafeArea(
         child: _topRatedMovies.isEmpty
             ? const Center(child: CircularProgressIndicator())
@@ -57,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                   spacing: 12,
                   children: [
                     _topBar(context),
-                    MovieCarousel(movies: _topRatedMovies.sublist(0, 3)),
+                    MovieCarousel(movies: _trendingMovies.sublist(0, 5)),
                     Padding(
                       padding: const EdgeInsets.all(18),
                       child: Column(
@@ -97,7 +107,10 @@ class _HomePageState extends State<HomePage> {
         children: [
           CircleAvatar(
             radius: 40,
-            backgroundImage: AssetImage("assets/img/ismail-durcan.jpg"),
+            backgroundColor: Colors.transparent,
+            backgroundImage: currentUser?.avatar != null
+                ? NetworkImage(currentUser!.avatar!)
+                : AssetImage("assets/img/popcorn.png"),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -105,7 +118,7 @@ class _HomePageState extends State<HomePage> {
             spacing: 4,
             children: [
               Text(
-                "Hello, İsmail",
+                "Hello, ${currentUser?.fullName ?? 'Guest'}",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               Text(
@@ -289,7 +302,7 @@ class MovieCard extends StatelessWidget {
                           style: TextStyle(
                             color: Theme.of(
                               context,
-                            ).colorScheme.onSecondary.withAlpha(128),
+                            ).textTheme.titleSmall!.color,
                             fontSize: 14,
                           ),
                         ),

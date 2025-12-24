@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:imdb_app/app/router.dart';
-import 'package:imdb_app/data/model/movie/movie_model.dart';
-import 'package:imdb_app/data/services/constant/api_constants.dart';
-import 'package:imdb_app/data/services/movie_service.dart';
-import 'package:imdb_app/features/home/utils/image_utils.dart';
-import 'package:imdb_app/features/onboarding/utils/bottom_card.dart';
+import 'package:movigo/app/router.dart';
+import 'package:movigo/data/model/movie/movie_model.dart';
+import 'package:movigo/data/services/constant/api_constants.dart';
+import 'package:movigo/data/services/movie_service.dart';
+import 'package:movigo/features/home/utils/image_utils.dart';
+import 'package:movigo/features/onboarding/utils/bottom_card.dart';
 
 class OnboardingFirst extends StatefulWidget {
   const OnboardingFirst({super.key});

@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:imdb_app/app/router.dart';
-import 'package:imdb_app/app/theme.dart';
-import 'package:imdb_app/app/theme_manager.dart';
-import 'package:imdb_app/features/profile/utils/auth_provider.dart';
+import 'package:movigo/app/router.dart';
+import 'package:movigo/app/theme.dart';
+import 'package:movigo/app/theme_manager.dart';
+import 'package:movigo/features/profile/utils/auth_provider.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await dotenv.load(fileName: "assets/.env");
   final authProvider = AuthProvider();
   await authProvider.checkAuthStatus(); // Auth durumunu kontrol et
 
@@ -34,7 +32,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'IMDB',
+      title: 'Movigo',
       theme: AppTheme.lightTheme, // Light tema
       darkTheme: AppTheme.darkTheme, // Dark tema
       themeMode: themeManager.themeMode, // Dinamik tema modu

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:imdb_app/app/router.dart';
-import 'package:imdb_app/app/utils/debounce.dart';
-import 'package:imdb_app/data/model/movie/movie_model.dart';
-import 'package:imdb_app/data/services/movie_service.dart';
-import 'package:imdb_app/data/services/search_service.dart';
-import 'package:imdb_app/features/home/home.dart';
-import 'package:imdb_app/features/home/widgets/movie_list_page_card.dart';
+import 'package:movigo/app/topbar.dart';
+import 'package:movigo/app/utils/debounce.dart';
+import 'package:movigo/data/model/movie/movie_model.dart';
+import 'package:movigo/data/services/movie_service.dart';
+import 'package:movigo/features/home/home.dart';
+import 'package:movigo/features/home/widgets/movie_list_page_card.dart';
 
 class BrowserPage extends StatefulWidget {
   const BrowserPage({super.key});
@@ -18,7 +17,7 @@ class BrowserPage extends StatefulWidget {
 class _BrowserPageState extends State<BrowserPage> {
   final TextEditingController _searchController = TextEditingController();
   late final MovieService _movieService;
-  late final SearchService _searchService;
+
   List<MovieModel> popuplarMovies = [];
   List<MovieModel> searchMoviesData = [];
   List<MovieModel> searchMovies = [];
@@ -30,7 +29,7 @@ class _BrowserPageState extends State<BrowserPage> {
     super.initState();
     _searchController.addListener(() => _debouncer.run(() => _getMovies()));
     _movieService = MovieService();
-    _searchService = SearchService();
+
     loadData();
   }
 
@@ -47,7 +46,7 @@ class _BrowserPageState extends State<BrowserPage> {
     });
     if (_searchController.text.isNotEmpty &&
         _searchController.text.length > 2) {
-      List<MovieModel> searchMovies = await _searchService.fetchMovies(
+      List<MovieModel> searchMovies = await _movieService.searchMovies(
         searchText: _searchController.text,
       );
       setState(() {
@@ -64,6 +63,7 @@ class _BrowserPageState extends State<BrowserPage> {
 
   Future<void> loadData() async {
     final popular = await _movieService.fetchMovies(type: MovieTypes.popular);
+    if (!mounted) return;
     setState(() {
       popuplarMovies = popular;
     });
@@ -72,23 +72,29 @@ class _BrowserPageState extends State<BrowserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: topNavBar(context, "Browser"),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(18),
-          child: CustomScrollView(
-            slivers: [
-              _searchTextField(context),
-              SliverToBoxAdapter(child: SizedBox(height: 20)),
-              isLoading
-                  ? SliverToBoxAdapter(
-                      child: Center(child: CircularProgressIndicator()),
-                    )
-                  : _searchResultField(),
-              SliverToBoxAdapter(child: SizedBox(height: 20)),
-              _topRatedField(),
-            ],
-          ),
+        child: Column(
+          children: [
+            TopBar(title: "Browser", showBackButton: false),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(18),
+                child: CustomScrollView(
+                  slivers: [
+                    _searchTextField(context),
+                    SliverToBoxAdapter(child: SizedBox(height: 20)),
+                    isLoading
+                        ? SliverToBoxAdapter(
+                            child: Center(child: CircularProgressIndicator()),
+                          )
+                        : _searchResultField(),
+                    SliverToBoxAdapter(child: SizedBox(height: 20)),
+                    _topRatedField(),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

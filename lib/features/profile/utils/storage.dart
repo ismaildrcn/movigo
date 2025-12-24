@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:imdb_app/data/model/user/user_model.dart';
+import 'package:movigo/data/model/user/user_model.dart';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:imdb_app/features/profile/utils/auth_response.dart';
+import 'package:movigo/features/profile/utils/auth_response.dart';
 
 class SecureStorage {
   static const _userKey = 'user';

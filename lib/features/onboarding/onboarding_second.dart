@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:imdb_app/app/router.dart';
-import 'package:imdb_app/features/onboarding/utils/bottom_card.dart';
+import 'package:movigo/app/router.dart';
+import 'package:movigo/features/onboarding/utils/bottom_card.dart';
 import 'dart:async';
 import 'dart:math';
 
