@@ -8,12 +8,16 @@ class ReviewCard extends StatelessWidget {
   final Review review;
   final double width;
   final bool isReviewExpanded;
+  final double? height;
+  final bool isDialog;
 
   const ReviewCard({
     super.key,
     required this.review,
     required this.width,
     this.isReviewExpanded = false,
+    this.height,
+    this.isDialog = false,
   });
 
   @override
@@ -23,6 +27,7 @@ class ReviewCard extends StatelessWidget {
 
     return Container(
       width: width,
+      height: height ?? null,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -99,7 +104,9 @@ class ReviewCard extends StatelessWidget {
                           child: review.authorDetails!.avatarPath == null
                               ? Icon(
                                   Icons.person_rounded,
-                                  color: Theme.of(context).colorScheme.primary,
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.primary,
                                   size: 24,
                                 )
                               : null,
@@ -176,7 +183,9 @@ class ReviewCard extends StatelessWidget {
                   // Quote icon
                   Icon(
                     Icons.format_quote_rounded,
-                    color: Theme.of(context).colorScheme.primary.withAlpha(80),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.primary.withAlpha(80),
                     size: 24,
                   ),
                   SizedBox(height: 8),
@@ -190,6 +199,21 @@ class ReviewCard extends StatelessWidget {
                         color: Theme.of(
                           context,
                         ).textTheme.bodyMedium!.color!.withAlpha(220),
+                      ),
+                    )
+                  else if (isDialog)
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Text(
+                          review.content.toString(),
+                          style: TextStyle(
+                            fontSize: 14,
+                            height: 1.5,
+                            color: Theme.of(
+                              context,
+                            ).textTheme.bodyMedium!.color!.withAlpha(220),
+                          ),
+                        ),
                       ),
                     )
                   else

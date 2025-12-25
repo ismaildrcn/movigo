@@ -556,7 +556,24 @@ class _MoviePageState extends State<MoviePage> {
                 : _reviews?.reviews.length ?? 0,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              return ReviewCard(review: _reviews!.reviews[index], width: 280);
+              return GestureDetector(
+                onTap: () => {
+                  showDialog(
+                    context: context,
+                    barrierDismissible: true,
+                    builder: (context) => Dialog(
+                      backgroundColor: Colors.transparent,
+                      child: ReviewCard(
+                        review: _reviews!.reviews[index],
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        height: MediaQuery.of(context).size.height * 0.6,
+                        isDialog: true,
+                      ),
+                    ),
+                  ),
+                },
+                child: ReviewCard(review: _reviews!.reviews[index], width: 280),
+              );
             },
           ),
         ),
