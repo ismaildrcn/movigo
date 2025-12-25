@@ -165,7 +165,7 @@ class _OnboardingThirdState extends State<OnboardingThird> {
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
                 borderRadius: BorderRadius.circular(12),
-                color: Theme.of(context).colorScheme.onSurface,
+                color: Theme.of(context).colorScheme.primary.withAlpha(75),
               ),
               child: Column(
                 spacing: 4,
@@ -176,11 +176,20 @@ class _OnboardingThirdState extends State<OnboardingThird> {
                     Icons.star_rate_rounded,
                     color: Theme.of(context).colorScheme.primary,
                   ),
-                  Text("Rating", style: TextStyle(color: Colors.white30)),
+                  Text(
+                    "Rating",
+                    style: TextStyle(
+                      color: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium?.color!.withAlpha(200),
+                    ),
+                  ),
                   Text(
                     "9 / 10",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium?.color!.withAlpha(220),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -200,7 +209,7 @@ class _OnboardingThirdState extends State<OnboardingThird> {
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
                 borderRadius: BorderRadius.circular(12),
-                color: Theme.of(context).colorScheme.onSurface,
+                color: Theme.of(context).colorScheme.primary.withAlpha(75),
               ),
               child: Column(
                 spacing: 4,
@@ -211,11 +220,20 @@ class _OnboardingThirdState extends State<OnboardingThird> {
                     Icons.access_time_filled_sharp,
                     color: Theme.of(context).colorScheme.primary,
                   ),
-                  Text("Duration", style: TextStyle(color: Colors.white30)),
+                  Text(
+                    "Duration",
+                    style: TextStyle(
+                      color: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium?.color!.withAlpha(200),
+                    ),
+                  ),
                   Text(
                     "1h 20m",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium?.color!.withAlpha(220),
                       fontWeight: FontWeight.bold,
                     ),
                   ),

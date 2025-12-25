@@ -26,7 +26,7 @@ class OnboardingBottomCard extends StatelessWidget {
         width: double.infinity,
         constraints: BoxConstraints(maxHeight: 300),
         decoration: BoxDecoration(
-          color: Color(0xFF171725),
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(32),
           boxShadow: [
             BoxShadow(

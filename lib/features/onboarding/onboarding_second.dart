@@ -163,7 +163,11 @@ class _OnboardingSecondState extends State<OnboardingSecond> {
                 shape: BoxShape.circle,
                 color: Theme.of(context).colorScheme.primary,
               ),
-              child: Icon(Icons.file_download_outlined),
+              child: Icon(
+                Icons.file_download_outlined,
+                color: Colors.white,
+                size: 20,
+              ),
             ),
           ),
 
