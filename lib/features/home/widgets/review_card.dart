@@ -27,7 +27,7 @@ class ReviewCard extends StatelessWidget {
 
     return Container(
       width: width,
-      height: height ?? null,
+      constraints: isDialog ? BoxConstraints(maxHeight: height ?? 400) : null,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -72,6 +72,7 @@ class ReviewCard extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(20),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Header with avatar and rating
@@ -104,9 +105,7 @@ class ReviewCard extends StatelessWidget {
                           child: review.authorDetails!.avatarPath == null
                               ? Icon(
                                   Icons.person_rounded,
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.primary,
+                                  color: Theme.of(context).colorScheme.primary,
                                   size: 24,
                                 )
                               : null,
@@ -183,9 +182,7 @@ class ReviewCard extends StatelessWidget {
                   // Quote icon
                   Icon(
                     Icons.format_quote_rounded,
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.primary.withAlpha(80),
+                    color: Theme.of(context).colorScheme.primary.withAlpha(80),
                     size: 24,
                   ),
                   SizedBox(height: 8),
@@ -202,7 +199,7 @@ class ReviewCard extends StatelessWidget {
                       ),
                     )
                   else if (isDialog)
-                    Expanded(
+                    Flexible(
                       child: SingleChildScrollView(
                         child: Text(
                           review.content.toString(),
