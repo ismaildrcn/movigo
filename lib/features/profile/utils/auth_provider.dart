@@ -34,4 +34,9 @@ class AuthProvider with ChangeNotifier {
     _isAuthenticated = false;
     notifyListeners();
   }
+
+  void updateUser(UserModel updatedUser) {
+    _user = updatedUser;
+    // notifyListeners();
+  }
 }

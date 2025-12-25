@@ -9,7 +9,7 @@ class UserModel {
   final bool? isVerified;
   final String? avatar;
   final String? password;
-  final String role;
+  final String? role;
   final String? createdAt;
   final String? token;
   final String? birthdate;
@@ -20,9 +20,9 @@ class UserModel {
     required this.fullName,
     required this.email,
     required this.password,
-    required this.role,
     required this.avatar,
     required this.phone,
+    this.role,
     this.isActive,
     this.isVerified,
     this.createdAt,
@@ -44,7 +44,7 @@ class UserModel {
       isVerified: json['is_verified'],
       createdAt: json['created_at'],
       token: json['token'],
-      birthdate: json['birth_date'],
+      birthdate: json['birthdate'],
       gender: json['gender'] != null
           ? GenderEnum.values.firstWhere(
               (e) => e.toString() == 'GenderEnum.' + json['gender'],
@@ -64,7 +64,7 @@ class UserModel {
       'is_active': isActive,
       'is_verified': isVerified,
       'created_at': createdAt,
-      'birth_date': birthdate,
+      'birthdate': birthdate,
       'gender': gender != null ? gender.toString().split('.').last : null,
     };
   }

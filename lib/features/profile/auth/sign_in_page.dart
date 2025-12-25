@@ -284,7 +284,6 @@ class _SignInPageState extends State<SignInPage> {
       _authService.signInUser(_email!, _password!).then((response) {
         if (response != null) {
           if (response.statusCode == 200) {
-
             Provider.of<AuthProvider>(
               context,
               listen: false,
@@ -293,8 +292,8 @@ class _SignInPageState extends State<SignInPage> {
           } else {
             // Hata durumunda snackbar göster
             AnimatedSnackBar.material(
-              response.data["message"],
-              type: response.statusCode == 404
+              response.data["message"] ?? "An error occurred",
+              type: (response.statusCode == 404 || response.statusCode == 401)
                   ? AnimatedSnackBarType.error
                   : AnimatedSnackBarType.warning,
             ).show(context);

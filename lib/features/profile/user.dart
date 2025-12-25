@@ -1,3 +1,5 @@
+import 'package:animated_snack_bar/animated_snack_bar.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movigo/app/router.dart';
@@ -122,17 +124,50 @@ class _UserEditPageState extends State<UserEditPage> {
                     ),
                     SizedBox(height: 10),
                     ElevatedButton(
-                      onPressed: () {
-                        userService.updateUserDetails({
-                          'id': user!.id!,
-                          'full_name': _userFullNameController.text,
-                          'email': _userEmailController.text,
-                          'phone': _userPhoneNumberController.text == ''
-                              ? null
-                              : _userPhoneNumberController.text,
-                          'gender': selectedGender.toString().split('.').last,
-                          'birthdate': _birthDateController.text,
-                        });
+                      onPressed: () async {
+                        Response? response = await userService
+                            .updateUserDetails({
+                              'id': user!.id!,
+                              'full_name': _userFullNameController.text,
+                              'email': _userEmailController.text,
+                              'phone': _userPhoneNumberController.text == ''
+                                  ? null
+                                  : _userPhoneNumberController.text,
+                              'gender': selectedGender
+                                  .toString()
+                                  .split('.')
+                                  .last,
+                              'birthdate': _birthDateController.text,
+                            });
+                        if (!mounted) return;
+
+                        if (response != null && response.statusCode == 200) {
+                          Provider.of<AuthProvider>(
+                            context,
+                            listen: false,
+                          ).updateUser(
+                            UserModel.fromJson(response.data['data']),
+                          );
+
+                          AnimatedSnackBar.material(
+                            "Profile updated successfully",
+                            type: AnimatedSnackBarType.success,
+                          ).show(context);
+
+                          // Snackbar gösterildikten sonra navigate
+                          Future.delayed(Duration(milliseconds: 100), () {
+                            if (mounted) context.push(AppRoutes.profile);
+                          });
+                        } else {
+                          AnimatedSnackBar.material(
+                            response?.data["message"] ?? "An error occurred",
+                            type:
+                                (response?.statusCode == 404 ||
+                                    response?.statusCode == 401)
+                                ? AnimatedSnackBarType.error
+                                : AnimatedSnackBarType.warning,
+                          ).show(context);
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         minimumSize: Size(double.infinity, 48),
