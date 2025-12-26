@@ -477,12 +477,40 @@ class _MoviePageState extends State<MoviePage> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
-                    showDialog(
+                    showGeneralDialog(
                       context: context,
                       barrierDismissible: true,
-                      builder: (context) => PersonDetailDialog(
-                        personId: _credits!.cast[index].id,
-                      ),
+                      barrierLabel: MaterialLocalizations.of(
+                        context,
+                      ).modalBarrierDismissLabel,
+                      barrierColor: Colors.black54,
+                      transitionDuration: const Duration(milliseconds: 300),
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          PersonDetailDialog(
+                            personId: _credits!.cast[index].id,
+                          ),
+                      transitionBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                            return SlideTransition(
+                              position:
+                                  Tween<Offset>(
+                                    begin: const Offset(
+                                      0,
+                                      1,
+                                    ), // Aşağıdan başlar
+                                    end: Offset.zero, // Ortada biter
+                                  ).animate(
+                                    CurvedAnimation(
+                                      parent: animation,
+                                      curve: Curves.easeOutCubic,
+                                    ),
+                                  ),
+                              child: FadeTransition(
+                                opacity: animation,
+                                child: child,
+                              ),
+                            );
+                          },
                     );
                   },
                   child: Container(
@@ -570,18 +598,44 @@ class _MoviePageState extends State<MoviePage> {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () => {
-                  showDialog(
+                  showGeneralDialog(
                     context: context,
                     barrierDismissible: true,
-                    builder: (context) => Dialog(
-                      backgroundColor: Colors.transparent,
-                      child: ReviewCard(
-                        review: _reviews!.reviews[index],
-                        width: MediaQuery.of(context).size.width * 0.85,
-                        height: MediaQuery.of(context).size.height * 0.6,
-                        isDialog: true,
-                      ),
-                    ),
+                    barrierLabel: MaterialLocalizations.of(
+                      context,
+                    ).modalBarrierDismissLabel,
+                    barrierColor: Colors.black54,
+                    transitionDuration: const Duration(milliseconds: 300),
+                    pageBuilder: (context, animation, secondaryAnimation) {
+                      return Dialog(
+                        backgroundColor: Colors.transparent,
+                        child: ReviewCard(
+                          review: _reviews!.reviews[index],
+                          width: MediaQuery.of(context).size.width * 0.85,
+                          height: MediaQuery.of(context).size.height * 0.6,
+                          isDialog: true,
+                        ),
+                      );
+                    },
+                    transitionBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                          return SlideTransition(
+                            position:
+                                Tween<Offset>(
+                                  begin: const Offset(0, 1), // Aşağıdan başlar
+                                  end: Offset.zero, // Ortada biter
+                                ).animate(
+                                  CurvedAnimation(
+                                    parent: animation,
+                                    curve: Curves.easeOutCubic,
+                                  ),
+                                ),
+                            child: FadeTransition(
+                              opacity: animation,
+                              child: child,
+                            ),
+                          );
+                        },
                   ),
                 },
                 child: ReviewCard(review: _reviews!.reviews[index], width: 280),
