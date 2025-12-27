@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movigo/data/model/movie/credits_model.dart';
 import 'package:movigo/data/model/movie/movie_model.dart';
+import 'package:movigo/features/general/no_wifi.dart';
 import 'package:movigo/features/home/review_page.dart';
 import 'package:movigo/features/home/upcoming_page.dart';
 import 'package:movigo/features/home/widgets/bottom_navigation_bar.dart';
@@ -46,6 +47,7 @@ class AppRoutes {
   static const String onboardingThird = '/onboarding-third';
   static const String wishlist = '/wishlist';
   static const String userEdit = '/user-edit';
+  static const String noWifi = '/no-wifi';
 }
 
 class AppRouter {
@@ -70,6 +72,7 @@ class AppRouter {
           currentPath != AppRoutes.onboardingThird &&
           currentPath != AppRoutes.createAccount &&
           currentPath != AppRoutes.markdownViewer &&
+          currentPath != AppRoutes.noWifi &&
           currentPath != AppRoutes.login) {
         return AppRoutes.onboardingFirst;
       }
@@ -99,6 +102,7 @@ class AppRouter {
           AppRoutes.verifyEmail,
           AppRoutes.forgotPassword,
           AppRoutes.resetPassword,
+          AppRoutes.noWifi,
         ];
 
         return Scaffold(
@@ -261,6 +265,13 @@ class AppRouter {
           path: AppRoutes.userEdit,
           pageBuilder: (context, state) {
             return MaterialPage(child: UserEditPage());
+          },
+        ),
+        GoRoute(
+          name: "noWifi",
+          path: AppRoutes.noWifi,
+          pageBuilder: (context, state) {
+            return MaterialPage(child: NoWifiPage());
           },
         ),
       ],
