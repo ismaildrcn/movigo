@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:movigo/data/services/connectivity_provider.dart';
+import 'package:provider/provider.dart';
 import 'dart:math' as math;
 
 class NoWifiPage extends StatefulWidget {
-  const NoWifiPage({super.key});
+  final VoidCallback? onRetry;
+  
+  const NoWifiPage({super.key, this.onRetry});
 
   @override
   State<NoWifiPage> createState() => _NoWifiPageState();
@@ -271,8 +275,13 @@ class _NoWifiPageState extends State<NoWifiPage> {
                   ),
                   const SizedBox(height: 30),
                   ElevatedButton(
-                    onPressed: () {
-                      // Yeniden dene butonuna basıldığında yapılacak işlemler
+                    onPressed: () async {
+                      // Önce custom callback varsa çağır
+                      widget.onRetry?.call();
+                      
+                      // ConnectivityProvider üzerinden bağlantıyı kontrol et
+                      final connectivityProvider = context.read<ConnectivityProvider>();
+                      await connectivityProvider.retryConnection();
                     },
                     child: const Text("Retry"),
                   ),
