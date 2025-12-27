@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:movigo/data/services/connectivity_service.dart';
 import 'package:movigo/features/profile/utils/storage.dart';
 
 class ApiService {
@@ -21,7 +22,16 @@ class ApiService {
     ),
   );
 
+  static bool _interceptorsAdded = false;
+
   static void addTokenInterceptor() {
+    if (_interceptorsAdded) return;
+    _interceptorsAdded = true;
+
+    // Connectivity interceptor ekle (ilk sırada olmalı)
+    instance.interceptors.add(ConnectivityInterceptor(ConnectivityService()));
+
+    // Token interceptor ekle
     instance.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
